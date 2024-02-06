@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DRK.DVDCentral.BL.Models", "DRK.DVDCentral.BL.Models\DRK.DVDCentral.BL.Models.csproj", "{A551029C-9FE1-40D1-BBC7-E60A2DEFCFF5}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DRK.DVDCentral.DB", "DRK.DVDCentral.DB\DRK.DVDCentral.DB.sqlproj", "{4B2AB6B9-0FBD-4D7E-8E1E-0B50C1DFBE0A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A551029C-9FE1-40D1-BBC7-E60A2DEFCFF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A551029C-9FE1-40D1-BBC7-E60A2DEFCFF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A551029C-9FE1-40D1-BBC7-E60A2DEFCFF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A551029C-9FE1-40D1-BBC7-E60A2DEFCFF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B2AB6B9-0FBD-4D7E-8E1E-0B50C1DFBE0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B2AB6B9-0FBD-4D7E-8E1E-0B50C1DFBE0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B2AB6B9-0FBD-4D7E-8E1E-0B50C1DFBE0A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{4B2AB6B9-0FBD-4D7E-8E1E-0B50C1DFBE0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B2AB6B9-0FBD-4D7E-8E1E-0B50C1DFBE0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B2AB6B9-0FBD-4D7E-8E1E-0B50C1DFBE0A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7E109E96-9DA7-4DCF-B6EF-3C9CEC152E29}
+	EndGlobalSection
+EndGlobal
