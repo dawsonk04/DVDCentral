@@ -9,3 +9,13 @@
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
+drop table if exists tblCustomer
+drop table if exists tblDirector
+drop table if exists tblFormat
+drop table if exists tblGenre
+drop table if exists tblMovie
+drop table if exists tblMovieGenre
+drop table if exists tblOrder
+drop table if exists tblOrderItem
+drop table if exists tblRating
+drop table if exists tblUser
