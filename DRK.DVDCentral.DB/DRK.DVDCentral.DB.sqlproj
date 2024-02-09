@@ -74,7 +74,7 @@
     <None Include="PostDeploy\DefaultData\OrderItems.sql" />
     <None Include="PostDeploy\DefaultData\Ratings.sql" />
     <None Include="PostDeploy\DefaultData\Users.sql" />
-    <None Include="DRK.DVDCentral.DB.publish.xml" />
+    <None Include="local.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="PreDeploy\Script.PreDeployment1.sql" />
