@@ -64,7 +64,7 @@ public partial class DVDCentralEntities : DbContext
             entity.Property(e => e.State)
                 .HasMaxLength(2)
                 .IsUnicode(false);
-            entity.Property(e => e.Zip)
+            entity.Property(e => e.ZIP)
                 .HasMaxLength(12)
                 .IsUnicode(false);
         });

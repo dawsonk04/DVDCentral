@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DRK.DVDCentral.PL;
+﻿namespace DRK.DVDCentral.PL;
 
 public partial class tblCustomer
 {
@@ -19,7 +16,7 @@ public partial class tblCustomer
 
     public string? State { get; set; }
 
-    public string Zip { get; set; } = null!;
+    public string ZIP { get; set; } = null!;
 
     public string Phone { get; set; } = null!;
 }

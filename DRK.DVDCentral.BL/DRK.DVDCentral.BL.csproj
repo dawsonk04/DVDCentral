@@ -14,4 +14,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DRK.DVDCentral.BL.Models\DRK.DVDCentral.BL.Models.csproj" />
+    <ProjectReference Include="..\DRK.DVDCentral.PL\DRK.DVDCentral.PL.csproj" />
+  </ItemGroup>
+
 </Project>
