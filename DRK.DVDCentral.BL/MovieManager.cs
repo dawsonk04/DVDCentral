@@ -105,7 +105,6 @@ namespace DRK.DVDCentral.BL
 
                     if (entity != null)
                     {
-                        entity.Id = dc.tblMovies.Any() ? dc.tblMovies.Max(s => s.Id) + 1 : 1;
                         entity.Title = movie.Title;
                         entity.Description = movie.Description;
                         entity.FormatId = movie.FormatId;

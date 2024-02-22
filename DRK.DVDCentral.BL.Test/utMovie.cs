@@ -46,6 +46,7 @@ namespace DRK.DVDCentral.BL.Test
         {
             int result = 0;
             Movie movie = MovieManager.LoadById(1);
+
             movie.Title = "Test";
             movie.Description = "Test";
             movie.DirectorId = 10;
