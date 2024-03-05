@@ -6,4 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DRK.DVDCentral.BL.Models\DRK.DVDCentral.BL.Models.csproj" />
+    <ProjectReference Include="..\DRK.DVDCentral.BL\DRK.DVDCentral.BL.csproj" />
+  </ItemGroup>
+
 </Project>
