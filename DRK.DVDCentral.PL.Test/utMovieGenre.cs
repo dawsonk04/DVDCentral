@@ -31,7 +31,7 @@ namespace DRK.DVDCentral.PL.Test
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(1, dc.tblMovieGenres.Count());
+            Assert.AreEqual(2, dc.tblMovieGenres.Count());
 
 
 
