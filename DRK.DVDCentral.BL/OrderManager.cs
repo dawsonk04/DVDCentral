@@ -189,7 +189,7 @@ namespace DRK.DVDCentral.BL
             }
         }
 
-        public static List<Order> Load()
+        public static List<Order> Load(int? CustomerId = null)
         {
             try
             {
@@ -197,7 +197,10 @@ namespace DRK.DVDCentral.BL
 
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
+                    // I think this was added correctly? -- it makes sense that it was to me joining table on (order.CustomerId = Customer.Id)
                     (from s in dc.tblOrders
+                     join c in dc.tblCustomers on s.CustomerId equals c.Id
+                     where s.CustomerId == CustomerId || CustomerId == null
                      select new
                      {
                          s.Id,

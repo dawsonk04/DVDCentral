@@ -150,6 +150,62 @@ namespace DRK.DVDCentral.BL
             }
 
         }
+        public static Order LoadbyOrderId(int orderId)
+        {
+            try
+            {
+
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    tblOrder entity = dc.tblOrders.FirstOrDefault(s => s.Id == orderId);
+                    if (entity != null)
+                    {
+                        Order order = new Order
+                        {
+                            Id = entity.Id,
+                            CustomerId = entity.CustomerId,
+                            OrderDate = entity.OrderDate,
+                            UserId = entity.UserId,
+                            ShipDate = entity.ShipDate,
+                            OrderItems = new List<OrderItem>()
+
+
+                        };
+
+
+                        var orderItemEntities = dc.tblOrderItems.Where(oi => oi.OrderId == orderId).ToList();
+                        foreach (var item in orderItemEntities)
+                        {
+                            order.OrderItems.Add(new OrderItem
+                            {
+                                Id = item.Id,
+                                OrderId = item.OrderId,
+                                MovieId = item.MovieId,
+                                Cost = (float)item.Cost,
+                                Quantity = item.Quantity
+                            });
+
+
+                        }
+                        return order;
+                    }
+                    else
+                    {
+                        throw new Exception();
+                    }
+
+
+                }
+
+
+            }
+
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         public static OrderItem LoadById(int id)
         {
@@ -219,6 +275,8 @@ namespace DRK.DVDCentral.BL
 
                 return list;
             }
+
+
 
             catch (Exception)
             {

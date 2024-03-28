@@ -216,7 +216,7 @@ namespace DRK.DVDCentral.BL
             }
         }
 
-        public static List<Movie> Load()
+        public static List<Movie> Load(int? genreId = null)
         {
             try
             {
@@ -224,7 +224,13 @@ namespace DRK.DVDCentral.BL
 
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
+                    // This is what I think how I am supposed to join the tables togather
                     (from s in dc.tblMovies
+                     join mg in dc.tblMovieGenres on s.Id equals mg.MovieId
+                     join g in dc.tblGenres on mg.GenreId equals g.Id
+                     join r in dc.tblRatings on s.RatingId equals r.Id
+                     join d in dc.tblDirectors on s.DirectorId equals d.Id
+
                      select new
                      {
                          s.Id,
@@ -235,7 +241,9 @@ namespace DRK.DVDCentral.BL
                          s.RatingId,
                          s.Cost,
                          s.InStkQty,
-                         s.ImagePath
+                         s.ImagePath,
+
+
                      })
                      .ToList()
                      .ForEach(movie => list.Add(new Movie
