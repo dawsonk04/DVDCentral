@@ -55,6 +55,11 @@
 
                 <div>
                     @await Component.InvokeAsync("Sidebar")
+
+                    <div class="mt-3">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Movie" asp-action="Index" asp-route-showall="true">All Movies</a>
+                    </div>
+
                 </div>
             </div>
 
