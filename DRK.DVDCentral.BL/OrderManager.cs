@@ -58,6 +58,13 @@ namespace DRK.DVDCentral.BL
                     dc.tblOrders.Add(entity);
                     results = dc.SaveChanges();
 
+                    // Insert OrderItems
+                    foreach (var item in order.OrderItems)
+                    {
+                        item.OrderId = order.Id;
+
+                        OrderItemManager.Insert(item, rollback);
+                    }
 
                     if (rollback) transaction.Rollback();
                 }
@@ -168,7 +175,7 @@ namespace DRK.DVDCentral.BL
                             OrderDate = entity.OrderDate,
                             UserId = entity.UserId,
                             ShipDate = entity.ShipDate,
-
+                            OrderItems = OrderItemManager.LoadbyOrderId(id)
                         };
                     }
                     else

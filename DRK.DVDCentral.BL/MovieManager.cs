@@ -230,12 +230,16 @@ namespace DRK.DVDCentral.BL
                      join g in dc.tblGenres on mg.GenreId equals g.Id
                      join r in dc.tblRatings on s.RatingId equals r.Id
                      join d in dc.tblDirectors on s.DirectorId equals d.Id
+                     join f in dc.tblFormats on s.FormatId equals f.Id
 
                      select new
                      {
                          s.Id,
                          s.Title,
                          s.Description,
+                         RatingDescription = r.Description,
+                         FormatDescription = f.Description,
+                         FullName = d.FirstName + " " + d.LastName,
                          s.FormatId,
                          s.DirectorId,
                          s.RatingId,
@@ -249,6 +253,9 @@ namespace DRK.DVDCentral.BL
                      .ForEach(movie => list.Add(new Movie
                      {
                          Id = movie.Id,
+                         RatingDescription = movie.RatingDescription,
+                         FormatDescription = movie.FormatDescription,
+                         FullName = movie.FullName,
                          Title = movie.Title,
                          Description = movie.Description,
                          FormatId = movie.FormatId,

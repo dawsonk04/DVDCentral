@@ -10,7 +10,7 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">DRK.DVDCentral.UI</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -26,29 +26,48 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Rating" asp-action="Index">Ratings</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Rating" asp-action="Index">Ratings</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Genre" asp-action="Index">Genres</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Genre" asp-action="Index">Genres</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Director" asp-action="Index">Directors</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Director" asp-action="Index">Directors</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Format" asp-action="Index">Formats</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Format" asp-action="Index">Formats</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Movie" asp-action="Index">Movies</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Movie" asp-action="Index">Movies</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 sidebar rounded-top">
+                <div class="header rounded-top">
+                    <h4>Genres</h4>
+                </div>
+
+
+                <div>
+                    @await Component.InvokeAsync("Sidebar")
+                </div>
+            </div>
+
+            <div class="col-md-9 main body-content rounded-top">
+                <div class="header rounded-top">
+                    <h4>Title</h4>
+                </div>
+                <div class="text-danger ms-2">@ViewBag.Error</div>
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
     </div>
 
     <footer class="border-top footer text-muted">

@@ -7,6 +7,6 @@
         public String? LastName { get; set; }
 
 
-        public String FullName => $"{FirstName} {LastName}";
+        public String? FullName => $"{FirstName} {LastName}";
     }
 }

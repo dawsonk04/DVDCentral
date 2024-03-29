@@ -11,7 +11,6 @@
 </p>
 <table class="table">
     <thead>
-        <!-- For the part where it wants certain things displayed I think I can just get rid of the things needed-->
         <tr>
            
             <th>
@@ -20,9 +19,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
-
-            
-            
+           
+           
+          
             <th>
                 @Html.DisplayNameFor(model => model.Cost)
             </th>
@@ -30,21 +29,30 @@
                 @Html.DisplayNameFor(model => model.InStkQty)
             </th>
             
+            <th>
+                @Html.DisplayNameFor(model => model.RatingDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormatDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            
+           
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
-            
            
+            
             
             <td>
                 @Html.DisplayFor(modelItem => item.Cost)
@@ -52,11 +60,20 @@
             <td>
                 @Html.DisplayFor(modelItem => item.InStkQty)
             </td>
-            
+           
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Id}) |
-                    @Html.ActionLink("Details", "Details", new { id=item.Id}) |
-                    @Html.ActionLink("Delete", "Delete", new { id=item.Id})
+                @Html.DisplayFor(modelItem => item.RatingDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormatDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
 }

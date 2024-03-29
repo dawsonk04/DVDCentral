@@ -150,7 +150,7 @@ namespace DRK.DVDCentral.BL
             }
 
         }
-        public static Order LoadbyOrderId(int orderId)
+        public static List<OrderItem> LoadbyOrderId(int orderId)
         {
             try
             {
@@ -172,22 +172,22 @@ namespace DRK.DVDCentral.BL
 
                         };
 
-
+                        List<OrderItem> orderItems = new List<OrderItem>();
                         var orderItemEntities = dc.tblOrderItems.Where(oi => oi.OrderId == orderId).ToList();
                         foreach (var item in orderItemEntities)
                         {
-                            order.OrderItems.Add(new OrderItem
+                            orderItems.Add(new OrderItem
                             {
                                 Id = item.Id,
                                 OrderId = item.OrderId,
                                 MovieId = item.MovieId,
-                                Cost = (float)item.Cost,
+                                Cost = item.Cost,
                                 Quantity = item.Quantity
                             });
 
 
                         }
-                        return order;
+                        return orderItems;
                     }
                     else
                     {

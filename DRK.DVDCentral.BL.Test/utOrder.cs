@@ -25,16 +25,17 @@ namespace DRK.DVDCentral.BL.Test
         public void InsertTest2()
         {
             int result = 0;
-            Order director = new Order
+            Order order = new Order
             {
                 CustomerId = 1,
                 OrderDate = DateTime.Now,
                 UserId = 1,
-                ShipDate = DateTime.Now
+                ShipDate = DateTime.Now,
+
 
 
             };
-            int results = OrderManager.Insert(director, true);
+            int results = OrderManager.Insert(order, true);
             Assert.AreEqual(1, results);
         }
 
@@ -42,13 +43,13 @@ namespace DRK.DVDCentral.BL.Test
         public void UpdateTest()
         {
             int result = 0;
-            Order director = OrderManager.LoadById(3);
-            director.CustomerId = 1;
-            director.OrderDate = DateTime.Now;
-            director.UserId = 1;
-            director.ShipDate = DateTime.Now;
+            Order order = OrderManager.LoadById(3);
+            order.CustomerId = 1;
+            order.OrderDate = DateTime.Now;
+            order.UserId = 1;
+            order.ShipDate = DateTime.Now;
 
-            int results = OrderManager.Update(director, true);
+            int results = OrderManager.Update(order, true);
             Assert.AreEqual(1, results);
         }
 
@@ -74,14 +75,14 @@ namespace DRK.DVDCentral.BL.Test
                     {
                         Id = 99,
                         MovieId = 1,
-                        Cost = (float)9.99,
+                        Cost = 9.99,
                         Quantity = 9
                     },
                     new OrderItem
                     {
                         Id = 99,
                         MovieId = 2,
-                        Cost = (float)8.88,
+                        Cost = 8.88,
                         Quantity = 2
                     }
                 }
@@ -89,7 +90,7 @@ namespace DRK.DVDCentral.BL.Test
             };
             int result = OrderManager.Insert(order, true);
             Assert.AreEqual(order.OrderItems[1].OrderId, order.Id);
-            Assert.AreEqual(3, result);
+            Assert.AreEqual(1, result);
         }
 
         [TestMethod]

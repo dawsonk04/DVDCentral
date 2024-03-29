@@ -8,9 +8,13 @@
         public int FormatId { get; set; }
         public int DirectorId { get; set; }
         public int RatingId { get; set; }
-        public float Cost { get; set; }
+        public double Cost { get; set; }
         public int InStkQty { get; set; }
         public String? ImagePath { get; set; }
+
+        public string RatingDescription { get; set; }
+        public string FormatDescription { get; set; }
+        public string FullName { get; set; }
 
     }
 }

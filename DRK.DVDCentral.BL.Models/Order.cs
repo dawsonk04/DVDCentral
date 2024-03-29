@@ -9,5 +9,12 @@
         public DateTime ShipDate { get; set; }
 
         public List<OrderItem> OrderItems { get; set; }
+
+        //OrderItems is never Null now
+        public Order()
+        {
+            OrderItems = new List<OrderItem>();
+        }
+
     }
 }

@@ -6,7 +6,7 @@
         public int OrderId { get; set; }
         public int Quantity { get; set; }
         public int MovieId { get; set; }
-        public float Cost { get; set; }
+        public double Cost { get; set; }
 
     }
 }
