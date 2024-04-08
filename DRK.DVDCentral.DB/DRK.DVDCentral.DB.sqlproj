@@ -90,6 +90,7 @@
     <Build Include="Tables\tblCustomer.sql" />
     <Build Include="Tables\tblOrder.sql" />
     <Build Include="Tables\tblUser.sql" />
+    <None Include="PostDeploy\DefaultData\MovieGenres.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="DRK.DVDCentral.DB.refactorlog" />

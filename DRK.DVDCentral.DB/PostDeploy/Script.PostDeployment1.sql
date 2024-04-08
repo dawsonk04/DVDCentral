@@ -18,3 +18,4 @@ Post-Deployment Script Template
 :r ./DefaultData/OrderItems.sql
 :r ./DefaultData/Ratings.sql
 :r ./DefaultData/Users.sql
+:r ./DefaultData/MovieGenres.sql
