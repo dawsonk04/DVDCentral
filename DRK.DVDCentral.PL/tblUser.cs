@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace DRK.DVDCentral.PL;
+﻿namespace DRK.DVDCentral.PL;
 
 public partial class tblUser
 {
     public int Id { get; set; }
+
+    public string UserId { get; set; } = null!;
 
     public string FirstName { get; set; } = null!;
 
