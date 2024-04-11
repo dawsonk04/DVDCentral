@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseName>dvdcentraldb</TargetDatabaseName>
+    <DeployScriptFileName>DRK.DVDCentral.DB.sql</DeployScriptFileName>
+    <TargetConnectionString>Data Source=server-35200-300078204.database.windows.net;Persist Security Info=False;User ID=300078204db;Pooling=False;Multiple Active Result Sets=False;Connect Timeout=60;Encrypt=False;Trust Server Certificate=False</TargetConnectionString>
+    <ProfileVersionNumber>1</ProfileVersionNumber>
+  </PropertyGroup>
+</Project>
