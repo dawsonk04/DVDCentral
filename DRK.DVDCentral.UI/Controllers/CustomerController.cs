@@ -1,5 +1,7 @@
 ﻿using DRK.DVDCentral.BL;
 using DRK.DVDCentral.BL.Models;
+using DRK.DVDCentral.UI.Models;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DRK.DVDCentral.UI.Controllers
@@ -18,7 +20,16 @@ namespace DRK.DVDCentral.UI.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            ViewBag.Title = "create program";
+            if (Authenticate.isAuthenticated(HttpContext))
+            {
+                return View();
+
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
+            }
         }
         [HttpPost]
 
@@ -39,7 +50,17 @@ namespace DRK.DVDCentral.UI.Controllers
 
         public IActionResult Edit(int id)
         {
-            return View(CustomerManager.LoadById(id));
+            ViewBag.Title = "create program";
+            if (Authenticate.isAuthenticated(HttpContext))
+            {
+                return View(CustomerManager.LoadById(id));
+
+            }
+            else
+            {
+                return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
+            }
+
 
         }
         [HttpPost]
