@@ -1,11 +1,12 @@
 ﻿@model IEnumerable<DRK.DVDCentral.BL.Models.Genre>
 
 <ul>
-    @foreach (var movie in Model)
+    @foreach (var genre in Model)
     {
         <li>
-            <a asp-controller="Genre"
-            asp-action="Browse">@movie.Description</a>
+            <a asp-controller="Movie"
+            asp-action="Browse"
+            asp-route-id="@genre.Id">@genre.Description </a>
         </li>
     }
 </ul>

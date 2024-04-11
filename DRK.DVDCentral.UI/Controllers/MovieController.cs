@@ -9,5 +9,11 @@ namespace DRK.DVDCentral.UI.Controllers
         {
             return View(MovieManager.Load());
         }
+
+        public IActionResult Browse(int id)
+        {
+            return View(nameof(Index), MovieManager.Load(id));
+        }
+
     }
 }

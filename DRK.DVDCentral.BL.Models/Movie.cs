@@ -13,6 +13,7 @@
         public String? ImagePath { get; set; }
 
         public string RatingDescription { get; set; }
+        public string DirectorFullName { get; set; }
         public string FormatDescription { get; set; }
         public string FullName { get; set; }
 

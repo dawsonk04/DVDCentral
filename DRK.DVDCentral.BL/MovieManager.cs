@@ -225,46 +225,46 @@ namespace DRK.DVDCentral.BL
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     // This is what I think how I am supposed to join the tables togather
-                    (from s in dc.tblMovies
-                     join mg in dc.tblMovieGenres on s.Id equals mg.MovieId
+                    (from m in dc.tblMovies
+                     join r in dc.tblRatings on m.RatingId equals r.Id
+                     join f in dc.tblFormats on m.FormatId equals f.Id
+                     join d in dc.tblDirectors on m.DirectorId equals d.Id
+                     join mg in dc.tblMovieGenres on m.Id equals mg.MovieId
                      join g in dc.tblGenres on mg.GenreId equals g.Id
-                     join r in dc.tblRatings on s.RatingId equals r.Id
-                     join d in dc.tblDirectors on s.DirectorId equals d.Id
-                     join f in dc.tblFormats on s.FormatId equals f.Id
-
+                     where g.Id == genreId || genreId == null
                      select new
                      {
-                         s.Id,
-                         s.Title,
-                         s.Description,
-                         RatingDescription = r.Description,
+                         // creating a record set from the tblMovie fields
+                         m.Id,
+                         m.Title,
+                         m.Description,
+                         m.FormatId,
                          FormatDescription = f.Description,
-                         FullName = d.FirstName + " " + d.LastName,
-                         s.FormatId,
-                         s.DirectorId,
-                         s.RatingId,
-                         s.Cost,
-                         s.InStkQty,
-                         s.ImagePath,
-
-
+                         m.DirectorId,
+                         DirectorFullName = d.FirstName + " " + d.LastName,
+                         m.RatingId,
+                         RatingDescription = r.Description,
+                         m.Cost,
+                         m.InStkQty,
+                         m.ImagePath
                      })
-                     .ToList()
-                     .ForEach(movie => list.Add(new Movie
-                     {
-                         Id = movie.Id,
-                         RatingDescription = movie.RatingDescription,
-                         FormatDescription = movie.FormatDescription,
-                         FullName = movie.FullName,
-                         Title = movie.Title,
-                         Description = movie.Description,
-                         FormatId = movie.FormatId,
-                         DirectorId = movie.DirectorId,
-                         RatingId = movie.RatingId,
-                         Cost = (float)movie.Cost,
-                         InStkQty = movie.InStkQty,
-                         ImagePath = movie.ImagePath
-                     }));
+                    .Distinct()
+                    .ToList()
+                    .ForEach(movie => list.Add(new Movie
+                    {
+                        Id = movie.Id,
+                        Title = movie.Title,
+                        Description = movie.Description,
+                        FormatId = movie.FormatId,
+                        FormatDescription = movie.FormatDescription,
+                        DirectorId = movie.DirectorId,
+                        DirectorFullName = movie.DirectorFullName,
+                        RatingId = movie.RatingId,
+                        RatingDescription = movie.RatingDescription,
+                        Cost = (float)movie.Cost,
+                        InStkQty = movie.InStkQty,
+                        ImagePath = movie.ImagePath
+                    }));
                 }
 
                 return list;
