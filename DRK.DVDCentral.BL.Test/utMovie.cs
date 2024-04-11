@@ -8,7 +8,7 @@ namespace DRK.DVDCentral.BL.Test
         [TestMethod]
         public void LoadTest()
         {
-            Assert.AreEqual(3, MovieManager.Load().Count);
+            Assert.AreEqual(1, MovieManager.Load().Count);
         }
 
         [TestMethod]

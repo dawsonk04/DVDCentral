@@ -204,9 +204,8 @@ namespace DRK.DVDCentral.BL
 
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
-                    // I think this was added correctly? -- it makes sense that it was to me joining table on (order.CustomerId = Customer.Id)
+
                     (from s in dc.tblOrders
-                     join c in dc.tblCustomers on s.CustomerId equals c.Id
                      where s.CustomerId == CustomerId || CustomerId == null
                      select new
                      {
@@ -214,7 +213,8 @@ namespace DRK.DVDCentral.BL
                          s.CustomerId,
                          s.OrderDate,
                          s.UserId,
-                         s.ShipDate
+                         s.ShipDate,
+
                      })
                      .ToList()
                      .ForEach(order => list.Add(new Order
@@ -223,7 +223,8 @@ namespace DRK.DVDCentral.BL
                          CustomerId = order.CustomerId,
                          OrderDate = order.OrderDate,
                          UserId = order.UserId,
-                         ShipDate = order.ShipDate
+                         ShipDate = order.ShipDate,
+
                      }));
                 }
 
