@@ -34,9 +34,10 @@ public partial class DVDCentralEntities : DbContext
     public virtual DbSet<tblUser> tblUsers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=DRK.DVDCentral.DB;Integrated Security=True");
-
+    {
+        optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=DRK.DVDCentral.DB;Integrated Security=True");
+        //optionsBuilder.UseSqlServer("Data Source=server-35200-300078204.database.windows.net;Initial Catalog=dvdcentraldb;User ID=300078204db;Password=Test123!;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False;");
+    }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<tblCustomer>(entity =>
