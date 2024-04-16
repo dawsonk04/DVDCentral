@@ -27,10 +27,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.ShipDate)
             </th>
-
-            
-
-           
+         
 
 
             <th></th>
@@ -54,7 +51,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ShipDate)
             </td>
-            //dont know where to go from here
+            
                 @foreach (var oi in item.OrderItems)
                 {
                 <tr>
