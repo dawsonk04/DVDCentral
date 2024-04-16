@@ -27,7 +27,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.ShipDate)
             </th>
+
+            
+
            
+
+
             <th></th>
         </tr>
     </thead>
@@ -49,7 +54,18 @@
             <td>
                 @Html.DisplayFor(modelItem => item.ShipDate)
             </td>
-               
+            //dont know where to go from here
+                @foreach (var oi in item.OrderItems)
+                {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => oi.Id)</td>
+                    <td>@Html.DisplayFor(modelItem => oi.Quantity)</td>
+                    <td>@Html.DisplayFor(modelItem => oi.MovieId)</td>
+                    <td>@Html.DisplayFor(modelItem => oi.Cost)</td>
+                </tr>
+                }
+
+
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id=item.Id}) |
                     @Html.ActionLink("Details", "Details", new { id=item.Id }) |
