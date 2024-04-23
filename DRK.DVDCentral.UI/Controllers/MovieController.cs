@@ -1,5 +1,8 @@
 ﻿using DRK.DVDCentral.BL;
 using DRK.DVDCentral.BL.Models;
+using DRK.DVDCentral.UI.Models;
+using DRK.DVDCentral.UI.ViewModels;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DRK.DVDCentral.UI.Controllers
@@ -15,6 +18,47 @@ namespace DRK.DVDCentral.UI.Controllers
         {
             return View(nameof(Index), MovieManager.Load(id));
         }
+
+        public IActionResult Create()
+        {
+            ViewBag.Title = "Create Movie";
+
+            MovieVM movieVM = new MovieVM();
+
+            movieVM.Movie = new Movie();
+
+            movieVM.Genres = GenreManager.Load();
+
+            movieVM.Directors = DirectorManager.Load();
+
+            movieVM.Ratings = RatingManager.Load();
+
+            movieVM.Formats = FormatManager.Load();
+
+            if (Authenticate.isAuthenticated(HttpContext))
+            {
+                return View(movieVM);
+            }
+            else
+            {
+                return RedirectToAction("Login","User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request)});
+            }
+        }
+
+        public IActionResult Create(MovieVM movieVM)
+        {
+            try
+            {
+                int result = MovieManager.Insert(movieVM.Movie);
+                return RedirectToAction(nameof(Index));
+            } catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        // Still need to add the edit
+
 
         public IActionResult Delete(int id)
         {

@@ -14,6 +14,11 @@ namespace DRK.DVDCentral.UI.ViewModels
 
         public List<Format> Formats { get; set; }
 
+        //not sure if this is needed??
+        public class CustomerOrder
+        {
+
+        }
 
     }
 }
