@@ -60,7 +60,7 @@
                                 var fullname = HttpContextAccessor.HttpContext?.Session.GetString("fullname");
                                 if (fullname != null) fullname = fullname.Replace("\"", "");
                             }
-                            <a class="nav-link text-light">@fullname</a>
+                            <a class="nav-link text-dark">@fullname</a>
                         </li>
                     </ul>
                 </div>
@@ -83,6 +83,16 @@
                 </div>
             </div>
 
+            <div id="overlay" onclick="off()">
+                <div id="imageproplarge">
+                    <img class="imageproplarge" id="output" />
+
+                </div>
+
+                </div>
+         
+
+
             <div class="col-md-9 main body-content rounded-top">
                 <div class="header rounded-top">
                     <h4>Title</h4>
@@ -95,6 +105,8 @@
         </div>
     </div>
 
+   
+
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2024 - DRK.DVDCentral.UI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
@@ -106,3 +118,16 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+<script type="text/javascript">
+    function off() {
+        console.log('Off');
+        document.getElementById("overlay").style.display = "none";
+    }
+
+    function on(picture) {
+        console.log('On');
+        document.getElementById("overlay").style.display = "block";
+        document.getElementById("output").src = picture;
+    }
+</script>

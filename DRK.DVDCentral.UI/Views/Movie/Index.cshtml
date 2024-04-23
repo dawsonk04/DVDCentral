@@ -44,7 +44,10 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-           
+                <td>
+                    <img src="~/images/@item.ImagePath" alt="@item.Description" id="programimage" onclick="on('/images/@item.ImagePath')" class="imagepropsmall" />
+                </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
@@ -73,9 +76,10 @@
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                 @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Delete", "Delete", new {  id=item.Id })
             </td>
         </tr>
 }
     </tbody>
 </table>
+

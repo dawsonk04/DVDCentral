@@ -1,4 +1,5 @@
 ﻿using DRK.DVDCentral.BL;
+using DRK.DVDCentral.BL.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DRK.DVDCentral.UI.Controllers
@@ -14,6 +15,30 @@ namespace DRK.DVDCentral.UI.Controllers
         {
             return View(nameof(Index), MovieManager.Load(id));
         }
+
+        public IActionResult Delete(int id)
+        {
+            var item = MovieManager.LoadById(id);
+            ViewBag.Title = "Delete";
+            return View(item);
+
+        }
+        [HttpPost]
+
+        public IActionResult Delete(int id, Movie movie, bool rollback = false)
+        {
+            try
+            {
+                int result = MovieManager.Delete(id, rollback);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View(movie);
+            }
+        }
+
 
     }
 }
