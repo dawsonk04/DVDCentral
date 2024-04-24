@@ -18,7 +18,11 @@ namespace DRK.DVDCentral.UI.Controllers
         {
             return View(nameof(Index), MovieManager.Load(id));
         }
-
+        public IActionResult Details(int id)
+        {
+            var item = MovieManager.LoadById(id);
+            return View(item);
+        }
         public IActionResult Create()
         {
             ViewBag.Title = "Create Movie";
@@ -58,7 +62,46 @@ namespace DRK.DVDCentral.UI.Controllers
         }
 
         // Still need to add the edit
+        public IActionResult Edit(int id)
+        {
+            if(Authenticate.isAuthenticated(HttpContext))
+            {
+                MovieVM movieVM = new MovieVM();
 
+                movieVM.Movie = MovieManager.LoadById(id);
+
+                movieVM.Genres = GenreManager.Load();
+
+                movieVM.Directors = DirectorManager.Load();
+
+                movieVM.Ratings = RatingManager.Load();
+
+                movieVM.Formats = FormatManager.Load();
+
+                return View(movieVM);
+            } else
+            {
+                return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
+            }
+
+        }
+
+        public IActionResult Edit(int id, MovieVM movieVM, bool rollback = false)
+        {
+            try
+            {
+                // Added process image stuff in here??
+
+
+                int result = MovieManager.Update(movieVM.Movie, rollback);
+                return RedirectToAction(nameof(Index));
+
+            } catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                return View(movieVM);
+            }
+        }
 
         public IActionResult Delete(int id)
         {
