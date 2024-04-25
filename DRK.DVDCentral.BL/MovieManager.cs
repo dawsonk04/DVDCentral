@@ -181,7 +181,27 @@ namespace DRK.DVDCentral.BL
 
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
-                    tblMovie entity = dc.tblMovies.FirstOrDefault(s => s.Id == id);
+                    //tblMovie entity = dc.tblMovies.FirstOrDefault(s => s.Id == id);
+                    var entity = (from m in dc.tblMovies
+                                  join mg in dc.tblMovieGenres on m.Id equals mg.MovieId
+                                  join r in dc.tblRatings on m.RatingId equals r.Id
+                                  join f in dc.tblFormats on m.FormatId equals f.Id
+                                  join d in dc.tblDirectors on m.DirectorId equals d.Id
+                                  where m.Id == id
+                                  select new
+                                  {
+                                      m.Id,
+                                      m.Title,
+                                      m.Description,
+                                      m.Cost,
+                                      m.InStkQty,
+                                      Rating = r.Description,
+                                      Format = f.Description,
+                                      DirectorFullName = d.FirstName + " " + d.LastName,
+                                      m.ImagePath,
+                                  })
+                               .FirstOrDefault();
+
                     if (entity != null)
                     {
                         return new Movie
@@ -189,9 +209,7 @@ namespace DRK.DVDCentral.BL
                             Id = entity.Id,
                             Title = entity.Title,
                             Description = entity.Description,
-                            FormatId = entity.FormatId,
-                            DirectorId = entity.DirectorId,
-                            RatingId = entity.RatingId,
+                            
                             Cost = (float)entity.Cost,
                             InStkQty = entity.InStkQty,
                             ImagePath = entity.ImagePath

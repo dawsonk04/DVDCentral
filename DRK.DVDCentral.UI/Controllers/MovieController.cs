@@ -49,6 +49,7 @@ namespace DRK.DVDCentral.UI.Controllers
             }
         }
 
+        [HttpPost]
         public IActionResult Create(MovieVM movieVM)
         {
             try
@@ -85,7 +86,7 @@ namespace DRK.DVDCentral.UI.Controllers
             }
 
         }
-
+        [HttpPost]
         public IActionResult Edit(int id, MovieVM movieVM, bool rollback = false)
         {
             try
