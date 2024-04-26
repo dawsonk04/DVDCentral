@@ -12,6 +12,7 @@
         public int InStkQty { get; set; }
         public String? ImagePath { get; set; }
 
+        public List<Genre> Genres { get; set; } = new List<Genre>();
         public string RatingDescription { get; set; }
         public string DirectorFullName { get; set; }
         public string FormatDescription { get; set; }

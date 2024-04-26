@@ -4,11 +4,19 @@ using DRK.DVDCentral.UI.Models;
 using DRK.DVDCentral.UI.ViewModels;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace DRK.DVDCentral.UI.Controllers
 {
     public class MovieController : Controller
     {
+        private readonly IWebHostEnvironment _host;
+
+        public MovieController(IWebHostEnvironment host)
+        {
+            _host = host;
+        }
+
         public IActionResult Index()
         {
             return View(MovieManager.Load());
@@ -29,15 +37,7 @@ namespace DRK.DVDCentral.UI.Controllers
 
             MovieVM movieVM = new MovieVM();
 
-            movieVM.Movie = new Movie();
-
-            movieVM.Genres = GenreManager.Load();
-
-            movieVM.Directors = DirectorManager.Load();
-
-            movieVM.Ratings = RatingManager.Load();
-
-            movieVM.Formats = FormatManager.Load();
+            
 
             if (Authenticate.isAuthenticated(HttpContext))
             {
@@ -53,9 +53,12 @@ namespace DRK.DVDCentral.UI.Controllers
         public IActionResult Create(MovieVM movieVM)
         {
             try
-            {
+            { 
                 int result = MovieManager.Insert(movieVM.Movie);
                 return RedirectToAction(nameof(Index));
+
+                //need to add more stuff here 
+
             } catch (Exception)
             {
                 throw;
@@ -67,17 +70,9 @@ namespace DRK.DVDCentral.UI.Controllers
         {
             if(Authenticate.isAuthenticated(HttpContext))
             {
-                MovieVM movieVM = new MovieVM();
+                MovieVM movieVM = new MovieVM(id);
 
-                movieVM.Movie = MovieManager.LoadById(id);
-
-                movieVM.Genres = GenreManager.Load();
-
-                movieVM.Directors = DirectorManager.Load();
-
-                movieVM.Ratings = RatingManager.Load();
-
-                movieVM.Formats = FormatManager.Load();
+               // still need to add stuff here
 
                 return View(movieVM);
             } else

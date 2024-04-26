@@ -176,7 +176,7 @@ namespace DRK.DVDCentral.BL
             }
         }
 
-        public static List<Genre> Load()
+        public static List<Genre> Load(int movieId)
         {
             try
             {
@@ -184,7 +184,8 @@ namespace DRK.DVDCentral.BL
 
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
-                    (from s in dc.tblGenres
+                    (from s in dc.tblGenres join mg in dc.tblMovieGenres on s.Id equals mg.Id
+                     where mg.MovieId == movieId
                      select new
                      {
                          s.Id,
@@ -207,5 +208,32 @@ namespace DRK.DVDCentral.BL
                 throw;
             }
         }
+
+        public static List<Genre> Load()
+        {
+            try
+            {
+                List<Genre> list = new List<Genre>();
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    (from s in dc.tblGenres
+                     select new
+                     {
+                         s.Id,
+                         s.Description
+                     })
+                    .ToList()
+                    .ForEach(genre => list.Add(new Genre
+                    {
+                        Id = genre.Id,
+                        Description = genre.Description
+                    }));
+                }
+                return list;
+            }
+            catch (Exception) { throw; }
+        }
+
+
     }
 }

@@ -199,6 +199,7 @@ namespace DRK.DVDCentral.BL
                                       Format = f.Description,
                                       DirectorFullName = d.FirstName + " " + d.LastName,
                                       m.ImagePath,
+                                      Genres = GenreManager.Load(id)
                                   })
                                .FirstOrDefault();
 
@@ -209,10 +210,13 @@ namespace DRK.DVDCentral.BL
                             Id = entity.Id,
                             Title = entity.Title,
                             Description = entity.Description,
-                            
-                            Cost = (float)entity.Cost,
+                            Cost = entity.Cost,
                             InStkQty = entity.InStkQty,
-                            ImagePath = entity.ImagePath
+                            RatingDescription = entity.Rating,
+                            FormatDescription = entity.Format,
+                            DirectorFullName = entity.DirectorFullName,
+                            ImagePath = entity.ImagePath,
+                            Genres = entity.Genres
 
                         };
                     }
