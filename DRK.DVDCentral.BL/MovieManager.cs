@@ -200,8 +200,8 @@ namespace DRK.DVDCentral.BL
                                       DirectorFullName = d.FirstName + " " + d.LastName,
                                       m.ImagePath,
                                       Genres = GenreManager.Load(id)
-                                  })
-                               .FirstOrDefault();
+                                 })
+                              .FirstOrDefault();
 
                     if (entity != null)
                     {
@@ -212,11 +212,11 @@ namespace DRK.DVDCentral.BL
                             Description = entity.Description,
                             Cost = entity.Cost,
                             InStkQty = entity.InStkQty,
-                            RatingDescription = entity.Rating,
+                            RatingDescription = entity.Description,
                             FormatDescription = entity.Format,
                             DirectorFullName = entity.DirectorFullName,
                             ImagePath = entity.ImagePath,
-                            Genres = entity.Genres
+                            Genres = GenreManager.Load(id)
 
                         };
                     }
@@ -253,7 +253,7 @@ namespace DRK.DVDCentral.BL
                      join d in dc.tblDirectors on m.DirectorId equals d.Id
                      join mg in dc.tblMovieGenres on m.Id equals mg.MovieId
                      join g in dc.tblGenres on mg.GenreId equals g.Id
-                     where g.Id == genreId || genreId == null
+                     where mg.GenreId == genreId || genreId == null
                      select new
                      {
                          // creating a record set from the tblMovie fields

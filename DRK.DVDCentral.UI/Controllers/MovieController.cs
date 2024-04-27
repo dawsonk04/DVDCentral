@@ -57,7 +57,7 @@ namespace DRK.DVDCentral.UI.Controllers
                 int result = MovieManager.Insert(movieVM.Movie);
                 return RedirectToAction(nameof(Index));
 
-                //need to add more stuff here 
+               // add stuff dealing with GenreId?
 
             } catch (Exception)
             {

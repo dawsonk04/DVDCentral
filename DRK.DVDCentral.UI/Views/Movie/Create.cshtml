@@ -29,25 +29,33 @@
 
             <div class="form-group">
                 <label asp-for="Movie.Genres" class="control-label"></label>
-                <input asp-for="Movie.Genres" class="form-control" />
-                <span asp-validation-for="Movie.FormatId" class="text-danger"></span>
+                <select asp-for="GenreIds" class="form-control" multiple asp-items="@(new MultiSelectList(Model.Genres,"Id","Description"))"> </select>
+
+                <span asp-validation-for="Movie.Genres" class="text-danger"> </span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Movie.FormatId" class="control-label"></label>
-                <input asp-for="Movie.FormatId" class="form-control" />
-                <span asp-validation-for="Movie.FormatId" class="text-danger"></span>
+                <label asp-for="Movie.FormatDescription" class="control-label"></label>
+                <select asp-for="Movie.FormatId" class="form-control" multiple asp-items="@(new MultiSelectList(Model.Formats,"Id","Description"))"> </select>
+
+                <span asp-validation-for="Movie.FormatId" class="text-danger"> </span>
             </div>
+
+
             <div class="form-group">
-                <label asp-for="Movie.DirectorId" class="control-label"></label>
-                <input asp-for="Movie.DirectorId" class="form-control" />
-                <span asp-validation-for="Movie.DirectorId" class="text-danger"></span>
+                <label asp-for="Movie.DirectorFullName" class="control-label"></label>
+                <select asp-for="Movie.DirectorId" class="form-control" multiple asp-items="@(new MultiSelectList(Model.Directors,"Id","FullName"))"> </select>
+
+                <span asp-validation-for="Movie.DirectorId" class="text-danger"> </span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Movie.RatingId" class="control-label"></label>
-                <input asp-for="Movie.RatingId" class="form-control" />
-                <span asp-validation-for="Movie.RatingId" class="text-danger"></span>
+                <label asp-for="Movie.RatingDescription" class="control-label"></label>
+                <select asp-for="Movie.RatingId" class="form-control" multiple asp-items="@(new MultiSelectList(Model.Ratings,"Id","Description"))"> </select>
+
+                <span asp-validation-for="Movie.RatingId" class="text-danger"> </span>
             </div>
+
             <div class="form-group">
                 <label asp-for="Movie.Cost" class="control-label"></label>
                 <input asp-for="Movie.Cost" class="form-control" />
@@ -60,25 +68,13 @@
             </div>
            
             <div class="form-group">
-                <label asp-for="Movie.RatingDescription" class="control-label"></label>
-                <input asp-for="Movie.RatingDescription" class="form-control" />
-                <span asp-validation-for="Movie.RatingDescription" class="text-danger"></span>
+                <label asp-for="Movie.ImagePath" class="control-label"></label>
+                <img class="imagepropmedium" alt="@Model.Movie.Description" id="movieimage"
+                src="/images/@Model.Movie.ImagePath" />
+                <input asp-for="Movie.ImagePath" class="form-control" />
+                <span asp-validation-for="Movie.ImagePath" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Movie.DirectorFullName" class="control-label"></label>
-                <input asp-for="Movie.DirectorFullName" class="form-control" />
-                <span asp-validation-for="Movie.DirectorFullName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Movie.FormatDescription" class="control-label"></label>
-                <input asp-for="Movie.FormatDescription" class="form-control" />
-                <span asp-validation-for="Movie.FormatDescription" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Movie.FullName" class="control-label"></label>
-                <input asp-for="Movie.FullName" class="form-control" />
-                <span asp-validation-for="Movie.FullName" class="text-danger"></span>
-            </div>
+      
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
