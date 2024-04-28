@@ -200,7 +200,7 @@ namespace DRK.DVDCentral.BL
                                       DirectorFullName = d.FirstName + " " + d.LastName,
                                       m.ImagePath,
                                       Genres = GenreManager.Load(id)
-                                 })
+                                  })
                               .FirstOrDefault();
 
                     if (entity != null)
@@ -216,7 +216,7 @@ namespace DRK.DVDCentral.BL
                             FormatDescription = entity.Format,
                             DirectorFullName = entity.DirectorFullName,
                             ImagePath = entity.ImagePath,
-                            Genres = GenreManager.Load(id)
+                            Genres = entity.Genres
 
                         };
                     }
@@ -260,14 +260,11 @@ namespace DRK.DVDCentral.BL
                          m.Id,
                          m.Title,
                          m.Description,
-                         m.FormatId,
-                         FormatDescription = f.Description,
-                         m.DirectorId,
-                         DirectorFullName = d.FirstName + " " + d.LastName,
-                         m.RatingId,
-                         RatingDescription = r.Description,
                          m.Cost,
                          m.InStkQty,
+                         Rating = r.Description,
+                         Format = f.Description,
+                         DirectorFullName = d.FirstName + " " + d.LastName,
                          m.ImagePath
                      })
                     .Distinct()
@@ -277,14 +274,11 @@ namespace DRK.DVDCentral.BL
                         Id = movie.Id,
                         Title = movie.Title,
                         Description = movie.Description,
-                        FormatId = movie.FormatId,
-                        FormatDescription = movie.FormatDescription,
-                        DirectorId = movie.DirectorId,
-                        DirectorFullName = movie.DirectorFullName,
-                        RatingId = movie.RatingId,
-                        RatingDescription = movie.RatingDescription,
-                        Cost = (float)movie.Cost,
+                        Cost = movie.Cost,
                         InStkQty = movie.InStkQty,
+                        RatingDescription = movie.Rating,
+                        FormatDescription = movie.Format,
+                        DirectorFullName = movie.DirectorFullName,
                         ImagePath = movie.ImagePath
                     }));
                 }

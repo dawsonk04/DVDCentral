@@ -1,10 +1,10 @@
 ﻿using DRK.DVDCentral.BL;
 using DRK.DVDCentral.BL.Models;
+using DRK.DVDCentral.UI.Extensions;
 using DRK.DVDCentral.UI.Models;
 using DRK.DVDCentral.UI.ViewModels;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace DRK.DVDCentral.UI.Controllers
 {
@@ -37,7 +37,7 @@ namespace DRK.DVDCentral.UI.Controllers
 
             MovieVM movieVM = new MovieVM();
 
-            
+
 
             if (Authenticate.isAuthenticated(HttpContext))
             {
@@ -45,7 +45,7 @@ namespace DRK.DVDCentral.UI.Controllers
             }
             else
             {
-                return RedirectToAction("Login","User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request)});
+                return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
             }
         }
 
@@ -53,13 +53,14 @@ namespace DRK.DVDCentral.UI.Controllers
         public IActionResult Create(MovieVM movieVM)
         {
             try
-            { 
+            {
                 int result = MovieManager.Insert(movieVM.Movie);
                 return RedirectToAction(nameof(Index));
 
-               // add stuff dealing with GenreId?
+                // add stuff dealing with GenreId?
 
-            } catch (Exception)
+            }
+            catch (Exception)
             {
                 throw;
             }
@@ -68,14 +69,15 @@ namespace DRK.DVDCentral.UI.Controllers
         // Still need to add the edit
         public IActionResult Edit(int id)
         {
-            if(Authenticate.isAuthenticated(HttpContext))
+            if (Authenticate.isAuthenticated(HttpContext))
             {
                 MovieVM movieVM = new MovieVM(id);
 
-               // still need to add stuff here
+                HttpContext.Session.SetObject("genreids", movieVM.GenreIds);
 
                 return View(movieVM);
-            } else
+            }
+            else
             {
                 return RedirectToAction("Login", "User", new { returnUrl = UriHelper.GetDisplayUrl(HttpContext.Request) });
             }
@@ -92,7 +94,8 @@ namespace DRK.DVDCentral.UI.Controllers
                 int result = MovieManager.Update(movieVM.Movie, rollback);
                 return RedirectToAction(nameof(Index));
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
                 return View(movieVM);
