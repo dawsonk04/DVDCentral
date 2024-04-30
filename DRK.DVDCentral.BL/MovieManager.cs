@@ -248,11 +248,10 @@ namespace DRK.DVDCentral.BL
                 {
                     // This is what I think how I am supposed to join the tables togather
                     (from m in dc.tblMovies
+                     join mg in dc.tblMovieGenres on m.Id equals mg.MovieId
                      join r in dc.tblRatings on m.RatingId equals r.Id
                      join f in dc.tblFormats on m.FormatId equals f.Id
                      join d in dc.tblDirectors on m.DirectorId equals d.Id
-                     join mg in dc.tblMovieGenres on m.Id equals mg.MovieId
-                     join g in dc.tblGenres on mg.GenreId equals g.Id
                      where mg.GenreId == genreId || genreId == null
                      select new
                      {

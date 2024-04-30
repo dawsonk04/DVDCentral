@@ -5,113 +5,98 @@ namespace DRK.DVDCentral.BL
 {
     public static class MovieGenreManager
     {
-        public static int Insert(int movieId, int genreId, ref int id, bool rollback = false)
+        public static void Insert(int movieId, int genreId, bool rollback = false)
         {
-            try
-            {
-                tblMovieGenre movieGenre = new tblMovieGenre();
-                {
-                    movieGenre.MovieId = movieId;
-                    movieGenre.GenreId = genreId;
-
-                };
-                int results = Insert(movieGenre, rollback);
-
-                // IMPORTANT - BACKFILL THE REF
-                id = movieGenre.Id;
-
-                return results;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-        }
-
-        public static int Insert(tblMovieGenre movieGenre, bool rollback = false)
-        {
+            //again I made it like the student advisor manager but it did not work so I just did what we usually do
             try
             {
                 int results = 0;
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
-                    IDbContextTransaction transaction = null;
+                    IDbContextTransaction? transaction = null;
                     if (rollback) transaction = dc.Database.BeginTransaction();
 
                     tblMovieGenre entity = new tblMovieGenre();
+                    entity.Id = dc.tblMovieGenres.Any() ? dc.tblMovieGenres.Max(s => s.Id) + 1 : 1;
 
-                    entity.MovieId = movieGenre.MovieId;
-                    entity.GenreId = movieGenre.GenreId;
-
-
-
-                    // IMPORTANT - BACK FILL THE ID
-                    movieGenre.Id = entity.Id;
+                    entity.GenreId = genreId;
+                    entity.MovieId = movieId;
 
                     dc.tblMovieGenres.Add(entity);
                     results = dc.SaveChanges();
 
-
-                    if (rollback) transaction.Rollback();
+                    if (rollback) transaction?.Rollback();
                 }
-
-                return results;
             }
             catch (Exception)
             {
 
                 throw;
             }
-
         }
 
 
 
-        public static int Delete(int id, bool rollback = false)
+        public static void Delete(int movieId, int genreId, bool rollback = false)
         {
             try
             {
-                int results = 0;
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     IDbContextTransaction transaction = null;
                     if (rollback) transaction = dc.Database.BeginTransaction();
 
-                    // get the row we are trying to update
-                    tblMovieGenre entity = dc.tblMovieGenres.FirstOrDefault(s => s.Id == id);
+                    // Get the row that we are trying to update
+                    tblMovieGenre? tblMovieGenre = dc.tblMovieGenres.FirstOrDefault(sa => sa.MovieId == movieId && sa.GenreId == genreId);
 
-                    if (entity != null)
+                    if (tblMovieGenre != null)
                     {
-                        dc.tblMovieGenres.Remove(entity);
-                        results = dc.SaveChanges();
+                        dc.tblMovieGenres.Remove(tblMovieGenre);
+
+                        //results = dc.SaveChanges();
+
+                        dc.SaveChanges();
                     }
                     else
                     {
                         throw new Exception("Row does not exist");
                     }
-
                     if (rollback) transaction.Rollback();
                 }
-                return results;
-
             }
-            catch (Exception)
-            {
+            catch (Exception) { throw; }
 
-                throw;
 
-            }
+            // below code doesnt work -- test methods are turning in "Void"??
+            //try
+            //{
+            //    using (DVDCentralEntities dc = new DVDCentralEntities())
+            //    {
+            //        tblMovieGenre? tblMovieGenre = dc.tblMovieGenres
+            //                                                .FirstOrDefault(sa => sa.MovieId == movieId
+            //                                                && sa.GenreId == genreId);
+            //        if (tblMovieGenre != null)
+            //        {
+            //            dc.tblMovieGenres.Remove(tblMovieGenre);
+            //            dc.SaveChanges();
+            //        }
+
+            //    }
+            //}
+            //catch (Exception)
+            //{
+
+            //    throw;
+            //}
 
         }
-
-
-
-
-
-
     }
-
 }
+
+
+
+
+
+
+
 

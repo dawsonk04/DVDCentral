@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create" method="post" enctype="multipart/form-data">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <input hidden asp-for="Movie.Id" class="form-control" />
@@ -66,16 +66,20 @@
                 <span asp-validation-for="Movie.InStkQty" class="text-danger"></span>
             </div>
 
-            <div class="form-group">
+             <div class="form-group">
                 <label asp-for="Movie.ImagePath" class="control-label"></label>
-                <img class="imagepropmedium" alt="@Model.Movie.Description" id="movieimage"
-                     src="/images/@Model.Movie.ImagePath" />
+                <img class="imagepropmedium" 
+                    alt="@Model.Movie.Description" 
+                    id="movieimage"
+                    onclick="on('/images/@Model.Movie.ImagePath')"
+                    src="/images/@Model.Movie.ImagePath"  />
                 <input asp-for="Movie.ImagePath" class="form-control" />
+                <input type="file" name="File" id="File" accept="image/" onchange="loadFile(event)" />
                 <span asp-validation-for="Movie.ImagePath" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Edit" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -89,3 +93,10 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+<script>
+    var loadFile = function (event) {
+        var output = document.getElementById('movieimage');
+        output.src = URL.createObjectURL(event.target.files[0]);
+    }
+</script>
