@@ -62,6 +62,18 @@
                             }
                             <a class="nav-link text-dark">@fullname</a>
                         </li>
+
+                        <li class="nav-item">
+                            @if (fullname == null || fullname == string.Empty)
+                            {
+                                <a asp-controller="User" asp-action="Login" class="nav-link text-dark">Login</a>
+                            }
+                            else
+                            {
+                                <a asp-controller="User" asp-action="Logout" class="nav-link text-dark">Logout</a>
+                            }
+                        </li>
+
                     </ul>
                 </div>
             </div>
