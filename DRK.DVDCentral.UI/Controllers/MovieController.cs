@@ -67,9 +67,24 @@ namespace DRK.DVDCentral.UI.Controllers
                 }
 
                 int result = MovieManager.Insert(movieVM.Movie);
+
+                //note to self
+                // add stuff dealing with GenreId? -- yes I came to this conclusion while at work @5/3/2024
+                // When inserting a movie I also need to insert the MovieGenres along with the movie -- I am an idiot
+                // that is why it IS being inserted into the database but displaying because their isnt any -->
+                // corresponding GenreId to display for it
+
+                IEnumerable<int> newGenreIds = new List<int>();
+                if (movieVM.GenreIds != null)
+                {
+                    newGenreIds = movieVM.GenreIds;
+                }
+                newGenreIds.ToList().ForEach(a => MovieGenreManager.Insert(movieVM.Movie.Id, a));
+
+
                 return RedirectToAction(nameof(Index));
 
-                // add stuff dealing with GenreId?
+
 
             }
             catch (Exception)

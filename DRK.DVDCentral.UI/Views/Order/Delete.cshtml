@@ -37,7 +37,12 @@
             @Html.DisplayFor(model => model.ShipDate)
         </dd>
     </dl>
-    
+
+    <!--Added again for checkpoint #6 fix-->
+    <div>
+        <partial name="_OrderItemsPartial" model="Model.OrderItems" />
+    </div>
+
     <form asp-action="Delete">
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>

@@ -25,7 +25,10 @@
                     
 
                     <div class="bg-white"> 
-                    Movie Description : @item.Description <br />
+                    
+                        <!--I think this works fine, encloses the movie description in a readonly label -->
+                    <label>Movie Description :</label> <input type="text" value="@item.Description" readonly /><br />
+
                     Rating : @item.RatingDescription <br/>
                     Format : @item.FormatDescription <br />
                     In-Stock Quantity : @item.InStkQty <br />
