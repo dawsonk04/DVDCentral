@@ -67,27 +67,7 @@ namespace DRK.DVDCentral.BL
             catch (Exception) { throw; }
 
 
-            // below code doesnt work -- test methods are turning in "Void"??
-            //try
-            //{
-            //    using (DVDCentralEntities dc = new DVDCentralEntities())
-            //    {
-            //        tblMovieGenre? tblMovieGenre = dc.tblMovieGenres
-            //                                                .FirstOrDefault(sa => sa.MovieId == movieId
-            //                                                && sa.GenreId == genreId);
-            //        if (tblMovieGenre != null)
-            //        {
-            //            dc.tblMovieGenres.Remove(tblMovieGenre);
-            //            dc.SaveChanges();
-            //        }
 
-            //    }
-            //}
-            //catch (Exception)
-            //{
-
-            //    throw;
-            //}
 
         }
     }

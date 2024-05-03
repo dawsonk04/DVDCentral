@@ -8,8 +8,8 @@
 
         public void InsertTest1()
         {
-            // these tests were failing not even sure why or how??
-            //int id = 0;
+            //these tests were failing not even sure why or how??
+            // int id = 0;
             //int results = MovieGenreManager.Insert(-1, -1, true);
             //Assert.AreEqual(1, results);
         }
