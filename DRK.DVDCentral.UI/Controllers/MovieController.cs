@@ -19,6 +19,7 @@ namespace DRK.DVDCentral.UI.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.Title = "List of Movies";
             return View(MovieManager.Load());
         }
 
@@ -34,6 +35,7 @@ namespace DRK.DVDCentral.UI.Controllers
         public IActionResult Create()
         {
             ViewBag.Title = "Create Movie";
+
 
             MovieVM movieVM = new MovieVM();
 
@@ -96,6 +98,8 @@ namespace DRK.DVDCentral.UI.Controllers
         // Still need to add the edit
         public IActionResult Edit(int id)
         {
+            ViewBag.Title = "Edit a student";
+
             if (Authenticate.isAuthenticated(HttpContext))
             {
                 MovieVM movieVM = new MovieVM(id);

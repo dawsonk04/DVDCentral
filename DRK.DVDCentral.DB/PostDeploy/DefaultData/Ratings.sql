@@ -1,7 +1,7 @@
 ﻿BEGIN
 	INSERT INTO tblRating(Id,Description)
 	VALUES
-	(1,'Good'),
-	(2,'Bad'),
-	(3,'Otherwise')
+	(1,'PG'),
+	(2,'R'),
+	(3,'G')
 END

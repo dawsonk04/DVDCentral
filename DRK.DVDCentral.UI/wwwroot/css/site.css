@@ -27,6 +27,10 @@ body {
     background: #ADD8E6;
 }
 
+.bg-cornblue {
+    background: cornflowerblue;
+}
+
 .card-img {
     height: 200px;
     background-position: center;
