@@ -2,6 +2,6 @@
 	INSERT INTO tblFormat(Id,Description)
 	VALUES
 	(1,'CD'),
-	(2,'Tape'),
+	(2,'VHS'),
 	(3,'DVD')
 END

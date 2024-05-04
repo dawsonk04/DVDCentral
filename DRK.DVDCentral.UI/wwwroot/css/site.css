@@ -110,3 +110,9 @@ body {
     font-size: 50px;
     transform: translate() -ms-transform: translate(-50%,-50%)
 }
+.custom {
+    font-size: 14px;
+    border: 1px solid #ccc; 
+    padding: 8px 10px; 
+    width: 300px; 
+}
