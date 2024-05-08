@@ -314,7 +314,7 @@ namespace DRK.DVDCentral.BL
                         entity.InStkQty = updatedStock;
                         result = dc.SaveChanges();
                     }
-                    else { throw new Exception("Row doesnt exist") };
+                    else { throw new Exception("Row doesnt exist"); };
                     if (rollback) transaction?.Rollback();
                 }
                 return result;
