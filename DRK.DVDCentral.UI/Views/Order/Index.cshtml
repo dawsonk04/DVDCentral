@@ -16,9 +16,19 @@
             <th>
                 @Html.DisplayNameFor(model => model.CustomerId)
             </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerFullName)
+            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.OrderDate)
             </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.UserFullName)
+            </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.UserId)
             </th>
@@ -26,7 +36,9 @@
                 @Html.DisplayNameFor(model => model.ShipDate)
             </th>
          
-
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
 
             <th></th>
         </tr>
@@ -34,6 +46,10 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerFullName)
+                </td>
           
             <td>
                 @Html.DisplayFor(modelItem => item.CustomerId)
@@ -41,13 +57,24 @@
             <td>
                 @Html.DisplayFor(modelItem => item.OrderDate)
             </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserFullName)
+                </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.UserId)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ShipDate)
             </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Total)
+                </td>
             
+                
+
                 @foreach (var oi in item.OrderItems)
                 {
                 <tr>

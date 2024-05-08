@@ -175,7 +175,8 @@ namespace DRK.DVDCentral.BL
                             OrderDate = entity.OrderDate,
                             UserId = entity.UserId,
                             ShipDate = entity.ShipDate,
-                            OrderItems = OrderItemManager.LoadbyOrderId(id)
+                            OrderItems = OrderItemManager.LoadbyOrderId(id),
+
                         };
                     }
                     else
