@@ -291,6 +291,44 @@ namespace DRK.DVDCentral.BL
                 throw;
             }
         }
+
+        // Added this for handeling the Updated InstockQuant
+
+        // Pretty much Exactly like the Update -- Thinking now I could prolly just update the Quanity in the -->
+        // Update Method itself, I think
+        //        @5/8/2024 --> Coming Back to this I dont think it would make much sense / I couldnt just update
+        // the instock quantity in the update itself, this method must be need
+        public static int UpdatedStockQuantity(int id, int updatedStock, bool rollback = false)
+        {
+            try
+            {
+                int result = 0;
+                using (DVDCentralEntities dc = new DVDCentralEntities())
+                {
+                    IDbContextTransaction transaction = null;
+                    if (rollback) transaction = dc.Database.BeginTransaction();
+
+                    tblMovie entity = dc.tblMovies.FirstOrDefault(s => s.Id == id);
+                    if (entity != null)
+                    {
+                        entity.InStkQty = updatedStock;
+                        result = dc.SaveChanges();
+                    }
+                    else { throw new Exception("Row doesnt exist") };
+                    if (rollback) transaction?.Rollback();
+                }
+                return result;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+
+
+
     }
 }
 
