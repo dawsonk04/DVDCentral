@@ -9,11 +9,11 @@ namespace DRK.DVDCentral.BL.Models
 
         public List<Movie> Items { get; set; } = new List<Movie>();
 
-        public int NumberOfItems { get { return Items.Sum(x => x.InStkQty); } }
+        public int NumberOfItems { get { return Items.Count; } }
 
         [DisplayName("SubTotal")]
         [DisplayFormat(DataFormatString = "{0:C}")]
-        public double SubTotal { get { return Items.Sum(x => x.Cost * x.InStkQty); } }
+        public double SubTotal { get { return Items.Sum(x => x.Cost * x.Quantity); } }
 
 
         [DisplayName("Tax")]
@@ -22,7 +22,7 @@ namespace DRK.DVDCentral.BL.Models
 
         [DisplayName("Final Total")]
         [DisplayFormat(DataFormatString = "{0:C}")]
-        public double Total { get { return SubTotal + TAX; } }
+        public double Total { get { return SubTotal + Tax; } }
 
     }
 }

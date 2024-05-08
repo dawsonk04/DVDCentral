@@ -9,9 +9,7 @@
     <thead>
         <tr>
 
-            <th>
-                @Html.DisplayNameFor(model => model.Items[0].ImagePath)
-            </th>
+           
             <th>
                 @Html.DisplayNameFor(model => model.Items[0].Title)
             </th>
@@ -31,9 +29,7 @@
         @foreach (var item in Model.Items)
         {
             <tr>
-                <td>
-                    <img src="~/images/@item.ImagePath" class="card-img" alt="@item.Description" onclick="on('/images/@item.ImagePath')" />
-                </td>
+               
 
 
                 <td>
@@ -75,6 +71,7 @@
         </tr>
     </thead>
     <tbody>
+
 @foreach (var item in Model.Items) {
         <tr>
           
@@ -93,5 +90,6 @@
                 </td>
         </tr>
 }
+
     </tbody>
 </table>

@@ -35,8 +35,9 @@ namespace DRK.DVDCentral.BL
                 {
                     CustomerId = 1,
                     UserId = 1,
+
                     OrderDate = DateTime.Now,
-                    ShipDate = DateTime.Now.AddDays(2)
+                    ShipDate = DateTime.Now.AddDays(3)
                 };
 
                 OrderManager.Insert(order);
@@ -47,8 +48,8 @@ namespace DRK.DVDCentral.BL
                     {
                         MovieId = item.Id,
                         OrderId = order.Id,
-                        Cost = item.Cost * item.Quantity,
-                        Quantity = item.Quantity
+                        Cost = item.Cost,
+                        Quantity = item.Quantity = 1
                     };
 
                     OrderItemManager.Insert(orderItem);
