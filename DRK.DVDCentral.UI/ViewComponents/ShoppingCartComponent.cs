@@ -2,7 +2,7 @@
 using DRK.DVDCentral.UI.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DRK.ProgDec.UI.ViewComponents
+namespace DRK.DVDCentral.UI.ViewComponents
 {
     public class ShoppingCartComponent : ViewComponent
     {
