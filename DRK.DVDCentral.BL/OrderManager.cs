@@ -160,12 +160,55 @@ namespace DRK.DVDCentral.BL
 
         public static Order LoadById(int id)
         {
+            #region oldCode
+            // using (DVDCentralEntities dc = new DVDCentralEntities())
+            //{
+            // Have to change this to do database joins 
+            //    tblOrder entity = dc.tblOrders.FirstOrDefault(s => s.Id == id);
+            //    if (entity != null)
+            //    {
+            //        return new Order
+            //        {
+            //            Id = entity.Id,
+            //            CustomerId = entity.CustomerId,
+            //            OrderDate = entity.OrderDate,
+            //            UserId = entity.UserId,
+            //            ShipDate = entity.ShipDate,
+            //            OrderItems = OrderItemManager.LoadbyOrderId(id),
+
+            //        };
+            //    }
+            //    else
+            //    {
+            //        throw new Exception();
+            //    }
+
+
+            //}
+            #endregion
+
             try
             {
-
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
-                    tblOrder entity = dc.tblOrders.FirstOrDefault(s => s.Id == id);
+                    var entity = (from o in dc.tblOrders
+                                  join oi in dc.tblOrderItems on o.Id equals oi.OrderId
+                                  join c in dc.tblCustomers on o.CustomerId equals c.Id
+                                  join u in dc.tblUsers on o.UserId equals u.Id
+                                  where o.Id == id
+                                  select new
+                                  {
+                                      o.Id,
+                                      o.CustomerId,
+                                      o.OrderDate,
+                                      o.UserId,
+                                      o.ShipDate,
+                                      c.FirstName,
+                                      c.LastName,
+
+                                      UserFirstName = u.FirstName,
+                                      UserLastName = u.LastName,
+                                  }).FirstOrDefault();
                     if (entity != null)
                     {
                         return new Order
@@ -176,6 +219,11 @@ namespace DRK.DVDCentral.BL
                             UserId = entity.UserId,
                             ShipDate = entity.ShipDate,
                             OrderItems = OrderItemManager.LoadbyOrderId(id),
+                            CustomerFirstName = entity.FirstName,
+                            CustomerLastName = entity.LastName,
+                            UserName = entity.UserFirstName,
+                            UserFirstName = entity.UserFirstName,
+                            UserLastName = entity.LastName,
 
                         };
                     }
@@ -186,15 +234,17 @@ namespace DRK.DVDCentral.BL
 
 
                 }
-
-
             }
-
             catch (Exception)
             {
 
                 throw;
             }
+
+
+
+
+
         }
 
         public static List<Order> Load(int? CustomerId = null)
