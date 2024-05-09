@@ -154,7 +154,7 @@ namespace DRK.DVDCentral.BL
         {
             try
             {
-
+                #region 
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     tblOrder entity = dc.tblOrders.FirstOrDefault(s => s.Id == orderId);
@@ -196,7 +196,7 @@ namespace DRK.DVDCentral.BL
 
 
                 }
-
+                #endregion
 
             }
 
