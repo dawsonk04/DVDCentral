@@ -8,5 +8,8 @@
         public int MovieId { get; set; }
         public double Cost { get; set; }
 
+        public string? MovieTitle { get; set; }
+        public string? ImagePath { get; set; }
+
     }
 }

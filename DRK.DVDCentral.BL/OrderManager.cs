@@ -203,13 +203,15 @@ namespace DRK.DVDCentral.BL
                                       o.OrderDate,
                                       o.UserId,
                                       o.ShipDate,
-                                      
+
                                       c.FirstName,
                                       c.LastName,
-                                      
+
+                                      OrderItems = OrderItemManager.LoadbyOrderId(id),
 
                                       UserFirstName = u.FirstName,
-                                      UserLastName = u.LastName
+                                      UserLastName = u.LastName,
+
 
 
                                   }).FirstOrDefault();
@@ -276,10 +278,11 @@ namespace DRK.DVDCentral.BL
                          c.FirstName,
                          c.LastName,
 
-
+                         Username = u.UserId,
                          UserFirstName = u.FirstName,
-                         UserLastName = u.LastName
-                         
+                         UserLastName = u.LastName,
+
+                         //Total = OrderItemManager.LoadbyOrderId(c.Id)
 
                      })
                      .ToList()
@@ -290,15 +293,18 @@ namespace DRK.DVDCentral.BL
                          OrderDate = order.OrderDate,
                          UserId = order.UserId,
                          ShipDate = order.ShipDate,
-                         
+
+
                          CustomerFirstName = order.FirstName,
                          CustomerLastName = order.LastName,
-                         UserName = order.UserFirstName,
+                         UserName = order.Username,
                          UserFirstName = order.UserFirstName,
-                         UserLastName = order.LastName
+                         UserLastName = order.LastName,
 
 
-                     }));
+
+
+                     })); ;
                 }
 
                 return list;

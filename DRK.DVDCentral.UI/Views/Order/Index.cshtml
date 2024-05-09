@@ -22,6 +22,10 @@
             </th>
 
             <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+
+            <th>
                 @Html.DisplayNameFor(model => model.OrderDate)
             </th>
 
@@ -36,9 +40,10 @@
                 @Html.DisplayNameFor(model => model.ShipDate)
             </th>
          
-            <th>
+            <!--Could not get to work-->
+            @*<th>
                 @Html.DisplayNameFor(model => model.Total)
-            </th>
+            </th>*@
 
             <th></th>
         </tr>
@@ -55,6 +60,11 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.CustomerFullName)
                 </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.OrderDate)
             </td>
@@ -70,9 +80,9 @@
                 @Html.DisplayFor(modelItem => item.ShipDate)
             </td>
 
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.Total)
-                </td>
+                </td>*@
             
                 
 

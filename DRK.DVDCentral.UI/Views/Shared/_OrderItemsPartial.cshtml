@@ -5,21 +5,29 @@
     <table id="orders" class="table">
         <thead>
             <tr>
-                <th>Order Id</th>
-                <th>Movie Id</th>
-                <th>Cost</th>
-                <th>Quantity</th>
+                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MovieTitle)
+                </th>
+                
+                <th>
+                    @Html.DisplayNameFor(model => model.Cost)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Quantity)
+                </th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td> 
-                        @Html.DisplayFor(modelItem => item.Id) 
+                    <td>
+                        <img src="~/images/@item.ImagePath" class="card-img imagepropsmall" alt="@item.MovieTitle" onclick="on('/images/@item.ImagePath')" />
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.MovieId)
+                        @Html.DisplayFor(modelItem => item.MovieTitle)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Cost)
@@ -27,6 +35,10 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Quantity)
                     </td>
+                    <td>
+                        <a asp-controller="OrderItem" asp-action="Remove" asp-route-id="@item.Id" class="btn btn-danger">Remove</a>
+                    </td>
+
                 </tr>
             }
         </tbody>

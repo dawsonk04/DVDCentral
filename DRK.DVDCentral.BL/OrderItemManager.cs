@@ -154,49 +154,80 @@ namespace DRK.DVDCentral.BL
         {
             try
             {
-                #region 
+
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
-                    tblOrder entity = dc.tblOrders.FirstOrDefault(s => s.Id == orderId);
-                    if (entity != null)
+                    #region 
+                    //tblOrder entity = dc.tblOrders.FirstOrDefault(s => s.Id == orderId);
+                    //if (entity != null)
+                    //{
+                    //    Order order = new Order
+                    //    {
+                    //        Id = entity.Id,
+                    //        CustomerId = entity.CustomerId,
+                    //        OrderDate = entity.OrderDate,
+                    //        UserId = entity.UserId,
+                    //        ShipDate = entity.ShipDate,
+                    //        OrderItems = new List<OrderItem>()
+
+
+                    //    };
+
+                    //    List<OrderItem> orderItems = new List<OrderItem>();
+                    //    var orderItemEntities = dc.tblOrderItems.Where(oi => oi.OrderId == orderId).ToList();
+                    //    foreach (var item in orderItemEntities)
+                    //    {
+                    //        orderItems.Add(new OrderItem
+                    //        {
+                    //            Id = item.Id,
+                    //            OrderId = item.OrderId,
+                    //            MovieId = item.MovieId,
+                    //            Cost = item.Cost,
+                    //            Quantity = item.Quantity
+                    //        });
+
+
+                    //    }
+                    //    return orderItems;
+                    //}
+                    //else
+                    //{
+                    //    throw new Exception();
+                    //}
+
+                    #endregion
+                    List<OrderItem> orderItems = new List<OrderItem>();
+
+                    var entites = (from oi in dc.tblOrderItems
+                                   join m in dc.tblMovies on oi.MovieId equals m.Id
+                                   where oi.OrderId == orderId
+                                   select new
+                                   {
+                                       oi.Id,
+                                       oi.OrderId,
+                                       oi.MovieId,
+                                       oi.Quantity,
+                                       oi.Cost,
+                                       m.Title,
+                                       m.ImagePath
+                                   }).ToList();
+
+                    foreach (var entity in entites)
                     {
-                        Order order = new Order
+                        orderItems.Add(new OrderItem
                         {
                             Id = entity.Id,
-                            CustomerId = entity.CustomerId,
-                            OrderDate = entity.OrderDate,
-                            UserId = entity.UserId,
-                            ShipDate = entity.ShipDate,
-                            OrderItems = new List<OrderItem>()
-
-
-                        };
-
-                        List<OrderItem> orderItems = new List<OrderItem>();
-                        var orderItemEntities = dc.tblOrderItems.Where(oi => oi.OrderId == orderId).ToList();
-                        foreach (var item in orderItemEntities)
-                        {
-                            orderItems.Add(new OrderItem
-                            {
-                                Id = item.Id,
-                                OrderId = item.OrderId,
-                                MovieId = item.MovieId,
-                                Cost = item.Cost,
-                                Quantity = item.Quantity
-                            });
-
-
-                        }
-                        return orderItems;
+                            OrderId = entity.OrderId,
+                            MovieId = entity.Id,
+                            Quantity = entity.Quantity,
+                            Cost = entity.Cost,
+                            MovieTitle = entity.Title,
+                            ImagePath = entity.ImagePath,
+                        });
                     }
-                    else
-                    {
-                        throw new Exception();
-                    }
-
-
+                    return orderItems;
                 }
-                #endregion
+
 
             }
 
@@ -254,13 +285,18 @@ namespace DRK.DVDCentral.BL
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
                     (from s in dc.tblOrderItems
+                     join m in dc.tblMovies
+                     on s.MovieId equals m.Id
                      select new
                      {
                          s.Id,
                          s.OrderId,
                          s.Quantity,
                          s.MovieId,
-                         s.Cost
+                         s.Cost,
+                         m.Title,
+                         m.ImagePath
+
                      })
                      .ToList()
                      .ForEach(orderItem => list.Add(new OrderItem
@@ -269,7 +305,9 @@ namespace DRK.DVDCentral.BL
                          OrderId = orderItem.OrderId,
                          Quantity = orderItem.Quantity,
                          MovieId = orderItem.MovieId,
-                         Cost = (float)orderItem.Cost
+                         Cost = (float)orderItem.Cost,
+                         MovieTitle = orderItem.Title,
+                         ImagePath = orderItem.ImagePath
                      }));
                 }
 

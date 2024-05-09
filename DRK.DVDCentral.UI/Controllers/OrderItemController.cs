@@ -10,5 +10,20 @@ namespace DRK.DVDCentral.UI.Controllers
             return View(OrderItemManager.Load());
         }
 
+        public IActionResult Remove(int id, bool rollback = false)
+        {
+            try
+            {
+                int result = OrderItemManager.Delete(id);
+                return RedirectToAction("Index", "Order");
+            }
+            catch (Exception)
+            {
+
+                throw;
+                return View();
+            }
+        }
+
     }
 }
