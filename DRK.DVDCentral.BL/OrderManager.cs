@@ -203,11 +203,15 @@ namespace DRK.DVDCentral.BL
                                       o.OrderDate,
                                       o.UserId,
                                       o.ShipDate,
+                                      
                                       c.FirstName,
                                       c.LastName,
+                                      
 
                                       UserFirstName = u.FirstName,
-                                      UserLastName = u.LastName,
+                                      UserLastName = u.LastName
+
+
                                   }).FirstOrDefault();
                     if (entity != null)
                     {
@@ -256,15 +260,26 @@ namespace DRK.DVDCentral.BL
                 using (DVDCentralEntities dc = new DVDCentralEntities())
                 {
 
-                    (from s in dc.tblOrders
-                     where s.CustomerId == CustomerId || CustomerId == null
+                    (from o in dc.tblOrders
+                     join oi in dc.tblOrderItems on o.Id equals oi.OrderId
+                     join c in dc.tblCustomers on o.CustomerId equals c.Id
+                     join u in dc.tblUsers on o.UserId equals u.Id
+                     where o.CustomerId == CustomerId || CustomerId == null
                      select new
                      {
-                         s.Id,
-                         s.CustomerId,
-                         s.OrderDate,
-                         s.UserId,
-                         s.ShipDate,
+                         o.Id,
+                         o.CustomerId,
+                         o.OrderDate,
+                         o.UserId,
+                         o.ShipDate,
+
+                         c.FirstName,
+                         c.LastName,
+
+
+                         UserFirstName = u.FirstName,
+                         UserLastName = u.LastName
+                         
 
                      })
                      .ToList()
@@ -275,6 +290,13 @@ namespace DRK.DVDCentral.BL
                          OrderDate = order.OrderDate,
                          UserId = order.UserId,
                          ShipDate = order.ShipDate,
+                         
+                         CustomerFirstName = order.FirstName,
+                         CustomerLastName = order.LastName,
+                         UserName = order.UserFirstName,
+                         UserFirstName = order.UserFirstName,
+                         UserLastName = order.LastName
+
 
                      }));
                 }
